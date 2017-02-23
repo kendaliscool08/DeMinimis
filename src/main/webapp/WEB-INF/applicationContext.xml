@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:mvc="http://www.springframework.org/schema/mvc" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop" 
+		xmlns:tx="http://www.springframework.org/schema/tx" 
+		xmlns:jms="http://www.springframework.org/schema/jms"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:task="http://www.springframework.org/schema/task" 
+		xmlns:security="http://www.springframework.org/schema/security"
+		xmlns:jee="http://www.springframework.org/schema/jee" 
+		xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	   http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	
+	<context:property-placeholder location="file:${catalina.home}/conf/application.properties" ignore-unresolvable="true" />
+	<context:annotation-config />
+	<context:component-scan base-package="com.ups.ttg.bsis" />
+	
+	<mvc:annotation-driven />
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="JedisClient" class="redis.clients.jedis.Jedis">
+		<constructor-arg index="0" type="java.lang.String" value="${jedis.url}"/>
+		<!-- <constructor-arg index="0" type="int" value="${jedis.port}"/> -->
+ 	</bean>
+
+	<!-- A JMS connection factory for ActiveMQ -->    
+    <bean id="ConnectionFactory" class="org.apache.activemq.ActiveMQSslConnectionFactory">
+    	<property name="brokerURL" value="${amq.url}" />
+        <property name="userName" value="${amq.username}" />
+        <property name="password" value="${amq.password}" />
+    </bean>
+	
+	<bean id="simpleMessageListener" class="com.ups.ttg.bsis.queue.listener.QueueListener" >
+		<property name="Jedis" ref="JedisClient" />
+	</bean>
+	
+	<!-- The Spring message listener container configuration -->
+	<!-- <jms:listener-container container-type="default" connection-factory="connectionFactory"  acknowledge="transacted" concurrency="10-50" /> -->
+	<jms:listener-container container-type="default" connection-factory="ConnectionFactory" acknowledge="auto">
+		<jms:listener destination="${amq.queueName}" ref="simpleMessageListener" method="onMessage" />
+	</jms:listener-container>
+	
+</beans>

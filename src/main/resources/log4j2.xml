@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30" name="deminimis" packages="">
+	<appenders>
+		<RollingFile name="MyRollingFile" fileName="${sys:catalina.home}/logs/deminimis.log" filePattern="${sys:catalina.home}/logs/deminimis-%i.log">
+			<PatternLayout>
+				<pattern>%d | %p | %c{1.} | %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="5" />
+		</RollingFile>
+	</appenders>
+	<loggers>
+		<root level="info">
+			<AppenderRef ref="MyRollingFile" />
+		</root>
+	</loggers>
+</Configuration>

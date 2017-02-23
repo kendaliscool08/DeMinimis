@@ -1,0 +1,29 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Shipments" type="ShipmentsType"/>
+  <xs:complexType name="AmountType">
+    <xs:sequence>
+      <xs:element type="xs:float" name="Value"/>
+      <xs:element type="xs:string" name="CurrencyCode"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ImportCountryType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Name"/>
+      <xs:element type="xs:string" name="Code"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ShipmentType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="ShipmentNumber"/>
+      <xs:element type="xs:string" name="BrokerageReferenceNumber"/>
+      <xs:element type="AmountType" name="Amount"/>
+      <xs:element type="xs:string" name="InvoiceNumber"/>
+      <xs:element type="ImportCountryType" name="ImportCountry"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ShipmentsType">
+    <xs:sequence>
+      <xs:element type="ShipmentType" name="Shipment" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shipments>
+	<Shipment>
+		<ShipmentNumber>SN123</ShipmentNumber>
+		<BrokerageReferenceNumber>BRNX123</BrokerageReferenceNumber>
+		<Amount>
+			<Value>123.00</Value>
+			<CurrencyCode>USD</CurrencyCode>
+		</Amount>
+		<InvoiceNumber>INV123</InvoiceNumber>
+		<ImportCountry>
+			<Name>United States</Name>
+			<Code>USA</Code>
+		</ImportCountry>
+	</Shipment>
+	<Shipment>
+		<ShipmentNumber>SN456</ShipmentNumber>
+		<BrokerageReferenceNumber>BRNX456</BrokerageReferenceNumber>
+		<Amount>
+			<Value>456.00</Value>
+			<CurrencyCode>USD</CurrencyCode>
+		</Amount>
+		<InvoiceNumber>INV456</InvoiceNumber>
+		<ImportCountry>
+			<Name>India</Name>
+			<Code>IND</Code>
+		</ImportCountry>
+	</Shipment>
+	<Shipment>
+		<ShipmentNumber>SN678</ShipmentNumber>
+		<BrokerageReferenceNumber>BRNX678</BrokerageReferenceNumber>
+		<Amount>
+			<Value>678.00</Value>
+			<CurrencyCode>USD</CurrencyCode>
+		</Amount>
+		<InvoiceNumber>INV678</InvoiceNumber>
+		<ImportCountry>
+			<Name>India</Name>
+			<Code>IND</Code>
+		</ImportCountry>
+	</Shipment>
+	<Shipment>
+		<ShipmentNumber>SN987</ShipmentNumber>
+		<BrokerageReferenceNumber>BRNX987</BrokerageReferenceNumber>
+		<Amount>
+			<Value>987.00</Value>
+			<CurrencyCode>USD</CurrencyCode>
+		</Amount>
+		<InvoiceNumber>INV987</InvoiceNumber>
+		<ImportCountry>
+			<Name>United States</Name>
+			<Code>USA</Code>
+		</ImportCountry>
+	</Shipment>
+	<Shipment>
+		<ShipmentNumber>SN222</ShipmentNumber>
+		<BrokerageReferenceNumber>BRNX222</BrokerageReferenceNumber>
+		<Amount>
+			<Value>222.00</Value>
+			<CurrencyCode>USD</CurrencyCode>
+		</Amount>
+		<InvoiceNumber>INV987</InvoiceNumber>
+		<ImportCountry>
+			<Name>United States</Name>
+			<Code>USA</Code>
+		</ImportCountry>
+	</Shipment>
+</Shipments>
